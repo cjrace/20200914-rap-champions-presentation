@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Where RAP meets analysts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Cam Race" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Where RAP meets analysts
+## Our journey in DfE
+### Cam Race
+### 2020/09/08 (updated: 2020/09/08)
+
+---
+
+
+
+
+
+
+# Introduction
+
+- Our plan for RAP
+- Work so far
+- Focus in on the automated screening checks, which came after setting our tidy data
+- End with automating QA more widely (next point of focus of the overall plan)
+
+---
+
+# What is RAP
+
+Don't worry, I'm not going to preach the choir here.
+
+However, this is always the most important question to start with - we couldn't start being effective until we knew what RAP looked like for us. 
+
+In order to do that, we clearly defined the scope of it...
+
+RAP DIAGRAM
+
+---
+
+# Work so far
+
+?
+
+---
+
+# Explore Education Statistics
+
+This was all done by utilising the new dissemination platform as a catalyst
+
+Change was already coming, therefore it was an ideal time to jump on the back of it to make that change a positive one
+
+Brief demo of [Explore Education Statistics](https://explore-education-statistics.service.gov.uk/)
+
+---
+
+# Guidance
+
+A key part of RAP is documentation, and implementing RAP has been no different.
+
+We have an [rmarkdown website](https://rsconnect/rsc/stats-production-guidance/) where all of our guidance is stored.
+
+Note that this is not publicly accessible, it is limited to DfE only as it runs off of our rsconnect servers.
+
+---
+
+# Data standards
+
+Built around principles of tidy data
+
+Examples (pick two very different subject areas)
+
+Still have debates now, where is the line between levels of categorical variable and a separate measurable variable, balance between 'molten' and 'tidy'.
+
+Ultimately, we've aimed to give analysts as much flexibility as we can within the constraints.
+
+---
+
+# Now we have standards, how can we check against them?
+
+Motivation for tool
+- Save time
+- Accuracy
+- Reliability
+- Remove single-person dependency
+- Empower analysts to do this themselves
+
+Design and usage 
+
+How it's evolved based on feedback
+
+The feedback I've had
+
+---
+
+# Notes to fit in
+
+User focus
+- Allowing analysts to take advantage of RAP without the barrier of technical knowledge
+- Fear of RAP and R and code
+
+
+---
+
+# First iteration
+
+Basic checks in an Rscript
+
+Output in console
+
+Run by myself, and manually fed back to teams
+
+A number of things to improve, though one I'll highlight is how the tests could fail early, which goes against the best practice in automated testing where you want maximum coverage, so that you can get as much useful information as possible, and minimise the need to rerun - I'll come back to this later
+
+---
+
+# Second iteration
+
+Rmarkdown
+
+# Third iteration
+
+Summary stats, and console only option for larger files
+
+---
+
+# Current iteration 
+
+Shiny app
+
+Automated tests using testthat and shinytest that run locally to automate the testing of any new code that goes into the app
+
+---
+
+# Next steps
+
+Integrate automated tests into devops - have struggled so far?
+
+Automated QA in app (alongside guidance and code examples)
+
+Continue to build on documentation, and features/code to help analysts make the most of RAP
+
+Further work to push this with our HoP, and get pressure the top to make more analysts make time for this
+
+Go back to the plan and target other areas
+
+---
+
+# Recap
+
+In some ways, you could say it's been quite simple:
+- Defined what 'RAP' was to us
+- Targetted specific areas of that plan
+- Iterated the solutions based on feedback
+- All the while learning more and more about R and what can be done with it
+- Keep pushing to improve moving forwards
+
+3 biggest challenges
+
+1. Understanding why things are the way they are
+2. Working out how to effectively implement RAP using knowledge of 1.
+3. Having a limited resource pool and indifferent senior managers
+
+Ultimately all have been overcome by a lot of effort, though it's not always simple or easy...
+
+---
+
+class: center, middle
+
+# Thanks!
+
+Any questions?
+
+Contact [cameron.race@education.gov.uk](mailto:cameron.race@education.gov.uk).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

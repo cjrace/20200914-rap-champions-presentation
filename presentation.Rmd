@@ -106,7 +106,9 @@ The feedback I've had
 
 # Notes to fit in
 
-Make sure to play on the user side, and how we've taken approaches that allow analysts to take advantage of RAP without needing to be overly technical, this has been the biggest challenge in implementation. Almost don't want them to care about 'RAP' in name, and instead the practical side of what we need to do in the day to day to improve our processes (and bring the many bounteous benefits of RAP that all of us are aware of)
+User focus
+- Allowing analysts to take advantage of RAP without the barrier of technical knowledge
+- Fear of RAP and R and code
 
 
 ---
