@@ -1,6 +1,6 @@
 ---
-title: "Where RAP meets analysts"
-subtitle: "Stats production in DfE"
+title: "Implementing RAP"
+subtitle: "Statistics publication in DfE"
 author: "Cam Race"
 date: "2020/09/14" #(updated: `r format(Sys.Date(), '%Y/%m/%d')`)"
 output:
@@ -31,6 +31,23 @@ knitr::opts_chunk$set(error = FALSE)
 
 # What I'll cover
 
+Background
+- implementing RAP across stats production in DfE
+
+
+Related work
+- documentation
+- dissemination platform
+- open data standards
+
+
+Focused example of embedding RAP within the production process
+- automated screening of data files
+- tool sharing some benefits of RAP without needing the technical knowledge
+
+
+Next steps and reflections
+
 ???
 
 Want to update others on what we're doing
@@ -38,29 +55,6 @@ Want to update others on what we're doing
 highlight things we've come across incase any of it is useful to others
 
 to invite feedback/questions on what we've done and plan to do
-
-
-
---
-
-Our plan for implementing RAP across stats production in DfE
-- setting the scope and details
-
---
-
-Work so far
-- documentation
-- dissemination platform
-- open data standards
-
---
-
-Focused example
-- automated screening of data files against standards that we have for open data files
-
---
-
-Next steps and reflections
 
 ---
 
@@ -70,18 +64,15 @@ Statistics Development Team - Data Insight and Statistics Division - DfE
 
 Central team who:
 
-- are overseeing the development of a new dissemination platform
+- guide ~100 analysts producing DfE's publications
 
-- offer support to teams for all kinds of things related to the production of 60 publications
+- are overseeing the development of a new dissemination platform
 
 - set and encourage best practices in production processes
 
 
 Team is made up of myself and Laura Selby
 
-???
-
-Example of currently working with a team to automate their secondary suppression processes
 
 ---
 layout: true
@@ -92,17 +83,17 @@ layout: true
 
 --
 
-Don't worry, I'm not going to explain to the RAP champions what RAP is
-
-This was useful in creating a plan for how to implement and encourage RAP across the analysts
-
-???
-
-We couldn't start being effective until we knew exactly what RAP looked like for us
+Don't worry, I'm not going to explain you what RAP is
 
 --
 
-Using this question, we defined the broad scope of it
+'What is it'? is always the first question asked of us
+
+Answering it clearly has been key to encouraging RAP across the analysts
+
+--
+
+To answer this question, we defined the broad scope of it
 
 .center[![Arrows defining the scope of DfE RAP plan](examples/RAP-Scope-Arrow.png)]
 
@@ -110,39 +101,35 @@ Using this question, we defined the broad scope of it
 
 This arrow shows the areas that all publication teams may have involvement in
 
-Teams vary on the amount of this they cover, some are heavily involved in the collection, and others don't have any involvement until after it's been cleaned
+Teams vary on the amount of this they cover, so it was important to set a clear scope for where this would apply to
 
-We then decided to focus our efforts into the place where we have full control, and where we'll get the biggest benefits for all teams
+Best value
 
-and while we can apply RAP to Publication writing, we felt that this would bring less benefits than in production processes themselves
+- Where we can control
+
+- RAP would bring benefits (i.e. not the writing of the publications (yet!))
 
 ---
 
-We then continued to define what RAP was to us by creating a detailed pipeline of the scope from the previous slide
+That 'statistics production' scope broken down into objects and process
 
 .center[![Overview of DfE RAP plan](examples/RAP-Process-Overview.png)]
 
 ???
 
-Can flick back to the previous side to highlight how the ends of this diagram are the ends of the scope on the arrow before. 
-
 It's less important the detail and more that we were defining it so clearly and breaking it into easily target-able objects
 
 ---
 
-We also took that a step further with the following diagram for breaking down what using RAP for that scope means in practice for teams
+What this means in practice
 
 .center[![Hexagons breaking down RAP to real world examples](examples/RAP-in-practice.png)]
 
 ???
 
+We also took that a step further with the following diagram for breaking down what using RAP for that scope means in practice for teams
+
 Highlight a couple of the hexagons, and then how this was all designed around making it easier to understand for the analysts
-
-Also flag that the Good used to be called minimum, though we needed to be a bit more positive/encouraging to teams
-
-Makes it feel easier to pick up a single thing for a team, rather than feeling like the whole of that block is unachievable
-
-Successful implementation has relied on the human users of RAP
 
 ---
 layout: false
@@ -151,13 +138,19 @@ layout: false
 
 A big part of this has been utilising the new dissemination platform as a catalyst
 
-Provided an ideal opportunity to overhaul and review all aspects of our work
+
+Provided an ideal opportunity to review all aspects of our work
+
 
 Our data files had to be standardised to run the platform off of the aggregated data, giving us a consistent end point to the pipeline I showed earlier
 
---
 
 Brief demo of [Explore Education Statistics](https://explore-education-statistics.service.gov.uk/) to give context
+
+???
+
+Go to find stats, EY release, then first data block and table tool
+
 
 ---
 
@@ -165,23 +158,14 @@ Brief demo of [Explore Education Statistics](https://explore-education-statistic
 
 A key part of RAP is documentation, and implementing RAP has been no different
 
+
 We found that we had an ever increasing amount of documents laying around
+
 
 Issues with finding things quickly, making sure it was the latest version, and for everyone else to do so too
 
---
 
 So we made an [rmarkdown website](https://rsconnect/rsc/stats-production-guidance/) where all of our guidance is stored in a single, maintained place
-
-???
-
-Demo - a lot to cover so try to go quickly
-
-L+D - tools that we recommend as we can support them easily and resources to learn them
-
-RAP - principles of RAP and checklist
-
-Data standards and everything a quick whizz
 
 --
 
@@ -194,15 +178,19 @@ layout: true
 
 ---
 
+Developed alongside Explore Education Statistics
+
 Built around principles of tidy data
 
 Essentially:
 
 - Every row refers to a single observational unit
+
 - Every column refers to a single variable 
-  - 'filters' for categorical variables
-  - 'indicators' for the numeric measures that we report
+
 - Specific standards around time and geography so the that platform can handle them
+
+- Standards around best practices such as avoiding spaces in variable names
 
 ---
 
@@ -214,7 +202,7 @@ Benefits of these standards:
 
 - Consistent across totally different areas for end users
 
-- Consistency of end target makes it easier to write code that can be generalised across all of our files
+- Consistency of end target - easier to write code that can be generalised across all of our files
 
 ---
 
@@ -228,12 +216,14 @@ Now we have standards, how can we check against them?
 
 --
 
+All files are checked before being uploaded to the platform
+
 I started off for a couple of months manually checking for:
 
-- Mandatory columns
-- Correct labelling
-- Appropriate structure
-- Spaces in variable names
+- Are the right columns present
+- Do they label things in line with the standards
+- Is the structure appropriate / is each column a single variable
+- Are there spaces in variable names
 
 --
 
@@ -246,9 +236,9 @@ and the number of files kept growing...
 ---
 layout: false
 
-# Automated screening
+# Data standards
 
-Easy to see the motivations for automating the screening of files
+Easy to see the motivations for automating this screening of files
 
 - Save time
 
@@ -258,15 +248,16 @@ Easy to see the motivations for automating the screening of files
 
 - Remove single-person dependency
 
-- Empower analysts to do this themselves (this comes later)
+- Make it easier for analysts to do this themselves
 
 
 ???
+
 Across the 60 publications we have at least 500 open data files
 
 It was unrealistic for anyone to check these manually
 
-Design and usage - I'm going to talk through some of the iterations we've had
+I'm going to talk through some of the iterations we've had of the tool
 
 and how/why it's evolved based on feedback
 
@@ -286,7 +277,7 @@ and how/why it's evolved based on feedback
 
 ???
 
-A number of things to improve, though one specific thing I'll highlight is how the tests could fail early, which goes against the best practice in automated testing where you want maximum coverage, so that you can get as much useful information as possible, and minimise the need to rerun - I'll come back to this later
+A number of things to improve - tests could fail early, which goes against the best practice in automated testing where you want maximum coverage, so that you can get as much useful information as possible, and minimise the need to rerun
 
 ---
 
@@ -302,17 +293,16 @@ Created an [Rmarkdown report](examples/iteration1_report.html) to send to analys
 
 - Gave an audit trail of the screening for future reference
 
-??? 
-
-Helped to remove some more of the human error from the process, automating the reporting as well as the checking
 
 ---
 
 # Third iteration
 
-Similar structure, with more tests, summary stats and nicer report
+Similar structure, with more tests, summary stats and improved usability
 
-Also more options for selecting files, including a console only option without a report for larger files
+- More options for selecting files
+
+- Included a console only option for quick screening without a report for larger files
 
 - Making it easier for analysts to see when there were issues flagged
 
@@ -321,7 +311,7 @@ Also more options for selecting files, including a console only option without a
 - Made it easier for analysts to run this project themselves by using renv for package management
 
 
-Give demonstration of using the tool - [GitHub repo](https://github.com/dfe-analytical-services/ees-data-screener)
+Give demonstration of using the tool locally - [GitHub repo](https://github.com/dfe-analytical-services/ees-data-screener)
 
 ---
 layout: true
@@ -332,7 +322,11 @@ layout: true
 
 I found that I was spending hours of my time going through with analysts setting this up, repeating the same things over and over
 
-So rather than constantly doing the verbal equivalent of churning out the same code over and over, I recorded a 10 minute youtube video instead
+So I recorded a 10 minute youtube video instead
+
+???
+
+Draw the comparison with code and copy/pasting lines as opposed to writing a reusable function
 
 ---
 
@@ -348,10 +342,14 @@ Walked through everything, including:
 Saved myself sitting beside each of the analysts at their desks to do this
 
 
-Proved very popular, empowering analysts
+Effective in reducing repetitive queries to me, freeing my time
 
 
-Effective in reducing repetitive queries to me
+Empowered analysts to do this themselves and use R
+
+
+Proved extremely popular
+
 
 ???
 
@@ -373,9 +371,9 @@ I ended up scrapping it in favour of [a temporary solution](https://github.com/d
 
 ???
 
-Go to repo and show rprofile and library scripts
+Not a sustainable solution, and despite this I still recommend renv, though this was a short term thing that worked, and worked more reliably than renv was doing at the time
 
-Not a sustainable solution, and renv is far better, though this was a short term thing that worked, and worked more reliably than renv was doing at the time
+Go to repo and show rprofile and library scripts
 
 ---
 layout: true
@@ -390,15 +388,15 @@ Converted the code to make an [R Shiny app](https://rsconnect/rsc/dfe-published-
 
 - Removes R and Rstudio barrier
 
-- Reduces dependency issues to server only, rather than 100+ different laptops
+- Reduces dependency issues to server only
 
-- Single version of the truth, no need to redownload/pull latest version
+- Single version of the truth
 
 - Increased speed by refactoring code
 
 - Increased test coverage 
 
-- Automated tests using testthat and shinytest that run locally to automate the testing of any new code that goes into the app
+- Automated tests on the app using testthat and shinytest that run locally
 
 ???
 
@@ -410,110 +408,21 @@ Now have 60 tests and running in around 13 seconds
 
 now 60 checks and counting, with preliminary stages to allow for maximum coverage while minimising confusing cross-errors where possible
 
----
-
-Feedback has been fantastic, overwhelmingly positive, easy to use, far quicker and more efficient
-
-For me personally, I never have to manually check another file again unless it an edge case
-
-Even then, I've not found an edge case that will break the app, it will handle any files thrown at it gracefully
-
----
-layout: false
-
-# Particularly useful things
-
-Testing for duplicate rows
-
-- almost scary how many analysts started to notice things in their data after I added this test, seems to be an easy SQL slip
-
-- `janitor::get_dupes()` 
-
----
-layout: true
-
-# Particularly useful things
+go to repo and show rprofile script for handy functions when developing for tests and formatting code
 
 ---
 
-White space, it can lead to many issues, and can be impossible to spot manually
+Feedback has been fantastic, overwhelmingly positive
 
-- Using `fread(data, strip.white = FALSE)` and testing for spaces
+Easy to use
 
-```
-data_variable_spaces <- function(data) {
-  data_spaces_check <- function(i) {
-    if (any(grepl("\\s", i))) {
-      return("FAIL")
-    } else {
-      return("PASS")
-    }
-  }
+Far quicker to screen files
 
-  pre_result <- stack(sapply(names(data), data_spaces_check))
+Far quicker to use within the analysts process
 
-  if (all(pre_result$values == "PASS")) {
-    output <- list(
-      "message" = "There are no spaces in the variable names.",
-      "result" = "PASS"
-    )
-  } else {
-```
-etc...
+Reduces human error significantly
 
----
-
-profvis - package to easily profile R code, recording how long different parts are taking to run
-
-- helped to spot unnecessary uses of `grepl()`, where `vector_of_values %in% dataset$column` would suffice
-
-- along with finding `use.names = FALSE` for `unlist()` leading to incredible time savings
-
----
-
-testthat and shinytest for automated unit and UI testing of the code
-
-- both very easy to use and quick to set up
-
-```
-run_tests <- function() {
-  Sys.unsetenv("http_proxy")
-  Sys.unsetenv("https_proxy")
-  source("global.r")
-  message("================================")
-  message("== testthat ====================")
-  message("")
-  testthat::test_dir("tests/testthat")
-  message("")
-  message("================================")
-  message("== shinytest ===================")
-  message("")
-  shinytest::testApp()
-  message("")
-  message("================================")
-}
-```
-
----
-
-styler for automating the formatting of code to tidyverse standards 
-
-- though make sure you're version controlling to check what it does change, I've not had any issues yet but better to be safe
-
-```
-tidy_code <- function() {
-  install.packages("styler")
-  library(styler)
-  styler::style_dir(recursive = FALSE)
-  styler::style_dir("R/")
-  styler::style_dir("tests/shinytest/", recursive = FALSE)
-  styler::style_dir("tests/testthat/", recursive = FALSE)
-}
-```
-
----
-
-- Commenting in a way to make use of the outline as scripts get longer - Ctrl-Shft-O in RStudio
+I've learnt an incredible amount by doing it
 
 ---
 layout: true
@@ -530,8 +439,13 @@ Integrate automated tests into DevOps deployment pipeline - have struggled so fa
 
 ### This month
 
-Automated QA / sense checking adding to app if a file passes 
-- again trying to lower the barrier to the benefits of automating common tasks
+Expand app to automate the production of generalised QA reports if a file passes
+
+- Explore the data with plots, summary stats and more
+
+- Trying to lower the barrier to the benefits of automating common tasks
+
+- Though alongside this is a push for teams to build their own specific QA with guidance and examples
 
 ---
 
@@ -539,37 +453,52 @@ Automated QA / sense checking adding to app if a file passes
 
 Continue to build on documentation, and features/code to help analysts make the most of RAP
 
+
+Working with teams towards the 'single production script' ideal
+
 ---
-layout: false
+layout: true
 
 # Recap
 
---
+---
 
-Gave on overview of how we've approached implementing RAP
+Remember this?
 
+.center[![Overview of DfE RAP plan](examples/RAP-Process-Overview.png)]
 
-A specific example of allowing analysts to take advantage of elements of RAP while lowering the barriers of technical knowledge
+???
 
-
-There is a surprisingly widespread fear of code and RAP/R anything that goes with it
-
-
-Different methods such as tutorial videos
-
-
-Giving guidance on the basics, what to learn, how to learn
-
-
-Even how to download and get the software running on their machine
+Highlight the screener and how this example is just one part of the scope for where we're implementing RAP
 
 ---
+
+Have a clearly defined plan
+
+
+First principles and what does it mean in practice?
+
+
+Utilising a variety of methods to get information across
+
+
+Important not to neglect the basics
+
+
+Tool for analysts being able to quickly feel benefits of RAP principles without technical knowledge
+
+
+Making RAP work with the analysts as well as the analysts working with RAP
+
+---
+
+layout: false
 
 class: center, middle
 
 # Thanks!
 
-Slides available at [...]()
+Slides available on [GitHub](https://cjrace.github.io/20200914-rap-champions-presentation/index.html#1)
 
 Made with [xarigan](https://bookdown.org/yihui/rmarkdown/xaringan.html) rmarkdown extension
 
@@ -581,7 +510,7 @@ Contact: [cameron.race@education.gov.uk](mailto:cameron.race@education.gov.uk)
 
 Thank you all for listening
 
-Slides are available at that link there
+Slides are available at that link there using GitHub pages
 
 This was made with xarigan package, which is an extension for rmarkdown, and I'd really recommend you check it out, the amount of flexibility is incredible and the keyboard shortcuts are really nice when presenting
 
