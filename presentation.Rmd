@@ -498,7 +498,7 @@ class: center, middle
 
 # Thanks!
 
-Slides available on [GitHub](https://cjrace.github.io/20200914-rap-champions-presentation/index.html#1)
+https://cjrace.github.io/20200914-rap-champions-presentation/index.html
 
 Made with [xarigan](https://bookdown.org/yihui/rmarkdown/xaringan.html) rmarkdown extension
 
